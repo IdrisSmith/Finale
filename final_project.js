@@ -15,14 +15,20 @@ var goal = makeText(score, 10, 10, 10,"white")
 addEventListener("keydown", playGame)
 function playGame(event){
 if(!death){
-  if (event.key == "ArrowLeft" || event.key == "a"){
+  if (event.key == "ArrowLeft"){
     move(player, -3, 0)
-    }else if(event.key == "ArrowRight" || event.key == "d"){
+  }else if(event.key == "ArrowRight"){
       move(player, 3, 0)
-    }else if(event.key == "e"){
+    }else if(event.key == "/"){
       createShot();
     }
-
+if(event.key == "a"){
+  move(player2, -3, 0)
+}else if(event.key == "d"){
+  move(player2, 3, 0)
+}else if(event.key == "e"){
+  create2Shot();
+}
     }
     requestAnimationFrame(playGame)
 if(event.key == "r"){
