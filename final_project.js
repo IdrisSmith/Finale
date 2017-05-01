@@ -1,8 +1,8 @@
 var namespace = "http://www.w3.org/2000/svg"
-
+var shooting2 = false
 // Write your code here!
 var player = makeImage("http://www.gifwave.com/media/463554_cartoons-comics-video-games-sprites-scott-pilgrim-paul-robertson_200s.gif", 0, 125, 30, 50)
-var player2 = makeImage("",)
+var player2 = makeRect(150, 125, 30, 40, "purple")
 var screen = makeText("GAME OVER", 0, 67.5, 30, "Press Start P2, cursive", "white", 0)
 var randomX = 0
 var enemy = makeImage("https://einarwh.files.wordpress.com/2011/11/invader-black-scaled500.png?w=260&h=200", 0, -20, 20, 20)
@@ -37,6 +37,7 @@ if(event.key == "r"){
 }
 
 var shot = makeRect(0, 135, 3, 3, "orange", 0)
+var shot2 = makeRect(0, 135, 3, 3, "orange", 0)
 function createShot(){
    var x = getX(player)
  var y = getY(player)
@@ -45,6 +46,26 @@ function createShot(){
   if(shooting == false){
   shoot();
 }
+}
+function create2Shot(){
+   var x = getX(player2)
+ var y = getY(player2)
+ shot2.setAttribute("y", y + 10)
+  shot2.setAttribute("x", x + 15)
+  if(shooting2 == false){
+  shoot2();
+}
+}
+function shoot2(){
+  shot2.setAttribute("opacity", 1)
+  move(shot2, 0, -2)
+  var shotY = getY(shot2)
+  if(shotY > -3){
+    requestAnimationFrame(shoot2)
+  shooting2 = true
+  }else{
+    shooting2 = false
+  }
 }
 function shoot(){
   shot.setAttribute("opacity", 1)
