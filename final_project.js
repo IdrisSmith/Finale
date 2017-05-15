@@ -1,8 +1,7 @@
 var namespace = "http://www.w3.org/2000/svg"
 var shooting2 = false
-// Write your code here!
-var player = makeImage("http://www.gifwave.com/media/463554_cartoons-comics-video-games-sprites-scott-pilgrim-paul-robertson_200s.gif", 0, 125, 30, 50)
-var player2 = makeRect(150, 125, 30, 40, "purple")
+var player = makeImage("http://rs430.pbsrc.com/albums/qq24/xRevear/Scott%20Pilgrim/toddingram_knees_idle-1.gif~c200", 0, 125, 30, 50)
+var player2 = makeImage("http://rs430.pbsrc.com/albums/qq24/xRevear/Scott%20Pilgrim/ramona_strong.gif~c200", 150, 125, 30, 40)
 var screen = makeText("GAME OVER", 0, 67.5, 30, "Press Start P2, cursive", "white", 0)
 var randomX = 0
 var enemy = makeImage("https://einarwh.files.wordpress.com/2011/11/invader-black-scaled500.png?w=260&h=200", 0, -20, 20, 20)
@@ -14,27 +13,39 @@ var score = 0
 var goal = makeText(score, 10, 10, 10,"white")
 addEventListener("keydown", playGame)
 function playGame(event){
+var playerX = getX(player)
 if(!death){
   if (event.key == "ArrowLeft"){
-    move(player, -3, 0)
+    move(player2, -3, 0)
   }else if(event.key == "ArrowRight"){
-      move(player, 3, 0)
+      move(player2, 3, 0)
     }else if(event.key == "/"){
-      createShot();
+      create2Shot();
     }
+  }    requestAnimationFrame(playGame)
+  if(event.key == "r"){
+    location.reload(true)
+  }
+  }
+  addEventListener("keydown", playGame2)
+function playGame2(event){
+  var player2X = getX(player2)
+if(!death){
 if(event.key == "a"){
-  move(player2, -3, 0)
+  move(player, -3, 0)
 }else if(event.key == "d"){
-  move(player2, 3, 0)
+  move(player, 3, 0)
 }else if(event.key == "e"){
-  create2Shot();
+  createShot();
+}else if(event.key == "x"){
+  player.setAttribute("xlink:href", "http://rs1309.pbsrc.com/albums/s630/BackwardsPenguin/RamonaFlowersgif_zpsf39b78a7.gif~c200")
+}else if(event.key == "z"){
+  player.setAttribute("xlink:href", "http://colorfulengineering.org/images/scott-pilgrim.gif")
 }
     }
-    requestAnimationFrame(playGame)
-if(event.key == "r"){
-  location.reload(true)
-}
-}
+    requestAnimationFrame(playGame2)
+  }
+
 
 var shot = makeRect(0, 135, 3, 3, "orange", 0)
 var shot2 = makeRect(0, 135, 3, 3, "orange", 0)
@@ -95,12 +106,12 @@ function enemyGeneration(){
 function moveEnemy(){
 move(enemy, 0, 1)
 var enemyY = getY(enemy)
-if(collides(shot,enemy)){
+if(collides(shot,enemy) || collides(shot2,enemy)){
   enemyGeneration();
  score = score + 1
 goal.innerHTML = score
 }
- if(collides(player,enemy)){
+ if(collides(player,enemy) || collides(player2,enemy)){
    death = true
    gameOver();
  }
