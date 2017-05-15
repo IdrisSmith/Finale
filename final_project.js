@@ -13,7 +13,7 @@ var score = 0
 var goal = makeText(score, 10, 10, 10,"white")
 addEventListener("keydown", playGame)
 function playGame(event){
-var playerX = getX(player)
+var player2X = getX(player)
 if(!death){
   if (event.key == "ArrowLeft"){
     move(player2, -3, 0)
@@ -21,6 +21,8 @@ if(!death){
       move(player2, 3, 0)
     }else if(event.key == "/"){
       create2Shot();
+    }else if(event.key == "."){
+      player2.setAttribute("xlink:href", "http://paulrobertson.mechafetus.com/ramona_dash.gif")
     }
   }    requestAnimationFrame(playGame)
   if(event.key == "r"){
